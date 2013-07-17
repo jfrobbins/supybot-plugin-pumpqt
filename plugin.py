@@ -32,6 +32,9 @@
 import re
 import time
 
+import subprocess
+import os.path.join as pathJoin
+
 import supybot.log as log
 import supybot.conf as conf
 import supybot.utils as utils
@@ -43,6 +46,16 @@ import supybot.ircmsgs as ircmsgs
 import supybot.plugins as plugins
 import supybot.ircutils as ircutils
 import supybot.callbacks as callbacks
+
+########
+#global pump auth stuff
+pumpPathToBin = 'pumpbin'
+    #link to your pump files, or leave this to use included files
+pumpUser = 'foo'
+pumpServer = 'microca.st'
+pumpPort = '443'
+#####
+
 
 class IrcStringAndIntDict(utils.InsensitivePreservingDict):
     def key(self, x):
@@ -197,8 +210,15 @@ class PumpQt(callbacks.Plugin):
             if len(results) == 1:
                 (nick, info) = results[0]
                 (when, said) = info
-                irc.reply(format('pumpqt: " %s " %s in %s',
-                                 said, nick, channel))
+                noteText = format('pumpqt: " %s " %s in %s',
+                                 said, nick, channel)
+                irc.reply(noteText)
+
+                subprocess.call(['node', pathJoin(pumpPathToBin,'pump-post-note'),
+                        '-s', pumpServer,
+                        '-u', pumpUser,
+                        '-n', noteText])
+                                 
             elif len(results) > 1:
                 L = []
                 for (nick, info) in results:
