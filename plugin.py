@@ -51,7 +51,7 @@ class IrcStringAndIntDict(utils.InsensitivePreservingDict):
         else:
             return ircutils.toLower(x)
 
-class SeenDB(plugins.ChannelUserDB):
+class PumpQtDB(plugins.ChannelUserDB):
     IdDict = IrcStringAndIntDict
     def serialize(self, v):
         return list(v)
@@ -95,8 +95,8 @@ class PumpQt(callbacks.Plugin):
     def __init__(self, irc):
         self.__parent = super(Seen, self)
         self.__parent.__init__(irc)
-        self.db = SeenDB(filename)
-        self.anydb = SeenDB(anyfilename)
+        self.db = PumpQtDB(filename)
+        self.anydb = PumpQtDB(anyfilename)
         self.lastmsg = {}
         self.ircstates = {}
         world.flushers.append(self.db.flush)
@@ -198,7 +198,7 @@ class PumpQt(callbacks.Plugin):
                 (nick, info) = results[0]
                 (when, said) = info
                 irc.reply(format('pumpqt: " %s " %s in %s',
-                                 said, nick, channel)
+                                 said, nick, channel))
             elif len(results) > 1:
                 L = []
                 for (nick, info) in results:
