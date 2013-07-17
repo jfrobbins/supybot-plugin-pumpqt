@@ -9,7 +9,12 @@ This should quote a user, then post the quote to Pump.io, and then allow more op
 - nodejs in order to run the pump bin files
 - you should run authorize yourself first like below
 
-
+## Settings ##
+    pumpPathToBin = 'pumpbin'
+        #link to your pump files, or leave this to use included files
+    pumpUser = 'foo'
+    pumpServer = 'microca.st'
+    pumpPort = '443'
 
 ## Authorization ##
     pump-register-app -s microca.st -P 443 -t CLI
