@@ -1,5 +1,4 @@
 ###
-# Copyright (c) 2005, Jeremiah Fincher
 # Copyright (c) 2013, Jon Robbins
 # All rights reserved.
 #
@@ -37,13 +36,16 @@ import supybot.world as world
 
 # Use this for the version of this plugin.  You may wish to put a CVS keyword
 # in here if you're keeping the plugin in CVS or some similar system.
-__version__ = "%%VERSION%%"
+__version__ = "master"
 
-__author__ = supybot.authors.jemfinch
+__author__ = 'Jon Robbins'
 
 # This is a dictionary mapping supybot.Author instances to lists of
 # contributions.
 __contributors__ = {}
+
+# This is a url where the most recent plugin package can be downloaded.
+__url__ = 'https://github.com/jfrobbins/supybot-plugin-pumpqt' # 'http://supybot.com/Members/yourname/Pumpqt2/download'
 
 import config
 import plugin
