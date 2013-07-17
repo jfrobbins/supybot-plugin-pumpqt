@@ -32,8 +32,7 @@
 import re
 import time
 
-import subprocess
-import os.path.join as pathJoin
+#~ import subprocess
 
 import supybot.log as log
 import supybot.conf as conf
@@ -103,13 +102,13 @@ class PumpQtDB(plugins.ChannelUserDB):
     def seen(self, channel, nickOrId):
         return self[channel, nickOrId]
 
-filename = conf.supybot.directories.data.dirize('Seen.db')
-anyfilename = conf.supybot.directories.data.dirize('Seen.any.db')
+filename = conf.supybot.directories.data.dirize('PumpQt.db')
+anyfilename = conf.supybot.directories.data.dirize('PumpQt.any.db')
 
 class PumpQt(callbacks.Plugin):
     noIgnore = True
     def __init__(self, irc):
-        self.__parent = super(Seen, self)
+        self.__parent = super(PumpQt, self)
         self.__parent.__init__(irc)
         self.db = PumpQtDB(filename)
         self.anydb = PumpQtDB(anyfilename)
@@ -217,11 +216,14 @@ class PumpQt(callbacks.Plugin):
                                  said, nick, channel)
                 irc.reply(noteText)
 
-                subprocess.call(['node', pathJoin(pumpPathToBin,'pump-post-note'),
-                        '-s', pumpServer,
-                        '-u', pumpUser,
-                        '-n', noteText])
-                                 
+                ######################################
+                #disabled for now for debug!
+                #~ subprocess.call(['node', pumpPathToBin + '/pump-post-note'),
+                        #~ '-s', pumpServer,
+                        #~ '-u', pumpUser,
+                        #~ '-n', noteText])
+                ######################################
+                
             elif len(results) > 1:
                 L = []
                 for (nick, info) in results:
@@ -241,8 +243,8 @@ class PumpQt(callbacks.Plugin):
         saying. <channel> is only necessary if the message isn't sent on the
         channel itself. <nick> may contain * as a wildcard.
         """
-        self._seen(irc, channel, name)
-    pumpqt = wrap(seen, ['channel', 'something'])
+        self._pumpqt(irc, channel, name)
+    pumpqt = wrap(pumpqt, ['channel', 'something'])
 
     def any(self, irc, msg, args, channel, optlist, name):
         """[<channel>] [--user <name>] [<nick>]
@@ -257,7 +259,7 @@ class PumpQt(callbacks.Plugin):
         if name and optlist:
             raise callbacks.ArgumentError
         elif name:
-            self._seen(irc, channel, name, any=True)
+            self._pumpqt(irc, channel, name, any=True)
         elif optlist:
             for (option, arg) in optlist:
                 if option == 'user':
