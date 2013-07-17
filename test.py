@@ -1,5 +1,6 @@
 ###
 # Copyright (c) 2002-2004, Jeremiah Fincher
+# Copyright (c) 2013, Jon Robbins
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -32,7 +33,7 @@ from supybot.test import *
 import supybot.ircdb as ircdb
 
 class ChannelDBTestCase(ChannelPluginTestCase):
-    plugins = ('Seen', 'User')
+    plugins = ('PumpQt', 'User')
     def setUp(self):
         ChannelPluginTestCase.setUp(self)
         self.prefix = 'foo!bar@baz'
@@ -45,32 +46,19 @@ class ChannelDBTestCase(ChannelPluginTestCase):
         chancap = ircdb.makeChannelCapability(self.channel, 'op')
         ircdb.users.getUser(self.nick).addCapability(chancap)
 
-    def testNoKeyErrorEscapeFromSeen(self):
-        self.assertRegexp('seen asldfkjasdlfkj', '^I have not seen')
-        self.assertNotRegexp('seen asldfkjasdlfkj', 'KeyError')
-
-    def testAny(self):
-        self.assertRegexp('seen any', 'test <test!user@host.domain.tld> has joined')
-        self.irc.feedMsg(ircmsgs.mode(self.channel, args=('+o', self.nick),
-                                      prefix=self.prefix))
-        self.assertRegexp('seen any %s' % self.nick,
-                          '^%s was last seen' % self.nick)
-
-    def testSeen(self):
-        self.assertNotError('seen last')
-        self.assertNotError('list')
-        self.assertNotError('seen %s' % self.nick)
-        m = self.assertNotError('seen %s' % self.nick.upper())
+    def testPumpQt(self):
+        self.assertNotError('pumpqt %s' % self.nick)
+        m = self.assertNotError('pumpqt %s' % self.nick.upper())
         self.failUnless(self.nick.upper() in m.args[1])
-        self.assertRegexp('seen user %s' % self.nick,
+        self.assertRegexp('pumpqt user %s' % self.nick,
                           '^%s was last seen' % self.nick)
-        for wildcard in self.wildcardTest:
-            self.assertRegexp('seen %s' % wildcard,
-                              '^%s was last seen' % self.nick)
-        self.assertRegexp('seen bar*', '^I haven\'t seen anyone matching')
+        #~ for wildcard in self.wildcardTest:
+            #~ self.assertRegexp('pumpqt %s' % wildcard,
+                              #~ '^%s was last seen' % self.nick)
+        self.assertRegexp('pumpqt bar*', '^I haven\'t seen anyone matching')
 
-    def testSeenNoUser(self):
-        self.assertNotRegexp('seen user alsdkfjalsdfkj', 'KeyError')
+    def testPumpQtNoUser(self):
+        self.assertNotRegexp('pumpqt user alsdkfjalsdfkj', 'KeyError')
 
 
 # vim:set shiftwidth=4 softtabstop=4 expandtab textwidth=79:
