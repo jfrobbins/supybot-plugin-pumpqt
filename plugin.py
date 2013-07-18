@@ -36,7 +36,7 @@ from pumpConfig import *
 import re
 import time
 
-#~ import subprocess
+import subprocess
 
 import supybot.log as log
 import supybot.conf as conf
