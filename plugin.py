@@ -204,7 +204,7 @@ class PumpQt(callbacks.Plugin):
             if len(results) == 1:
                 (nick, info) = results[0]
                 (when, said) = info
-                noteText = format('pumpqt: " %s " %s in %s',
+                noteText = format('pumpqt: "%s " %s in %s',
                                  said, nick, channel)
                 irc.reply(noteText)
 
