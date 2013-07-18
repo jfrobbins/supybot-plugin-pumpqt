@@ -4,7 +4,8 @@
 ########
 #global pump auth stuff
 pumpPathToBin = 'PumpQt/pumpbin'
-    #link to your pump files, or leave this to use included files
+    #link to your pump.io source directory,
+    #   unless you have pump.io installed globally, then you could leave it.
 pumpUser = 'foo'
     #your username to post with
 pumpServer = 'microca.st'
