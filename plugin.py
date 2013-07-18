@@ -213,6 +213,7 @@ class PumpQt(callbacks.Plugin):
                 subprocess.call(['node', pumpPathToBin + '/pump-post-note',
                         '-s', pumpServer,
                         '-u', pumpUser,
+                        '-p', 
                         '-n', noteText])
                 ######################################
                 
