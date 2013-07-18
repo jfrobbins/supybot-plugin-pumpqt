@@ -3,7 +3,7 @@
 
 ########
 #global pump auth stuff
-pumpPathToBin = 'pumpbin'
+pumpPathToBin = 'PumpQt/pumpbin'
     #link to your pump files, or leave this to use included files
 pumpUser = 'foo'
     #your username to post with
