@@ -29,3 +29,8 @@ This should quote a user, then post the quote to Pump.io, and then allow more op
     git clone https://github.com/jfrobbins/supybot-plugin-pumpqt.git PumpQt
 
 And then whatever to enable it.  Something from here: http://supybook.fealdia.org/devel/#_plugins
+
+
+## To Do ##
+- clean up the code
+- add more options 
