@@ -210,7 +210,7 @@ class PumpQt(callbacks.Plugin):
 
                 ######################################
                 #disabled for now for debug!
-                subprocess.call(['node', pumpPathToBin + '/pump-post-note'),
+                subprocess.call(['node', pumpPathToBin + '/pump-post-note',
                         '-s', pumpServer,
                         '-u', pumpUser,
                         '-n', noteText])
