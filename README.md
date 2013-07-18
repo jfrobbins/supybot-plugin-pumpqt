@@ -9,6 +9,7 @@ This should quote a user, then post the quote to Pump.io, and then allow more op
 - you should run authorize yourself first like below
 
 ## Settings ##
+ These are in the file pumpConfig.py
     pumpPathToBin = 'pumpbin'
         #link to your pump files, or leave this to use included files
     pumpUser = 'foo'
@@ -20,7 +21,7 @@ This should quote a user, then post the quote to Pump.io, and then allow more op
     pump-authorize -s microca.st -P 443 -u username
 
 ## Test note ##
-    pump-post-note -s microca.st -P 443 -u username -n "Hello World!"
+    pump-post-note -s microca.st -P 443 -u username -p -n "Hello World!"
 
 
 ## Install ##
