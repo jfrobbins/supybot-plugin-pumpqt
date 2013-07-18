@@ -10,8 +10,9 @@ This should quote a user, then post the quote to Pump.io, and then allow more op
 
 ## Settings ##
  These are in the file pumpConfig.py
-    pumpPathToBin = 'pumpbin'
+    pumpPathToBin = 'PumpQt/pumpbin'
         #link to your pump files, or leave this to use included files
+        #   you can only leave this local dir if you installed pump.io globally!
     pumpUser = 'foo'
     pumpServer = 'microca.st'
     pumpPort = '443'
